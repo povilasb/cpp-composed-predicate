@@ -92,6 +92,22 @@ private:
 	std::vector<TPredicate2> predicates2_;
 };
 
+
+/**
+ * Deduces predicate types from the specified arguments and creates appropriate
+ * composed predicate.
+ */
+template <typename TObject, typename TPredicate1, typename TPredicate2>
+composed_predicate<TObject, TPredicate1, TPredicate2>
+make_composed_predicate(const TPredicate1& predicate1,
+	const TPredicate2& predicate2)
+{
+	composed_predicate<TObject, TPredicate1, TPredicate2> retval;
+	retval.and_(predicate1).and_(predicate2);
+
+	return retval;
+}
+
 } // namespace predicate.
 } // namespace nonstd.
 
