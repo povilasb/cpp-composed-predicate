@@ -10,11 +10,18 @@ set(test_src_dir "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(test_src_files
 	${test_src_dir}/composed_predicate_test.cpp
 	${test_src_dir}/cpp11_composed_predicate_test.cpp
+	${test_src_dir}/boost_composed_predicate_test.cpp
 )
 
 
 set_source_files_properties(${test_src_dir}/cpp11_composed_predicate_test.cpp
 	PROPERTIES COMPILE_FLAGS -std=c++11)
+
+
+find_package(Boost REQUIRED)
+if (Boost_FOUND)
+	include_directories(${Boost_INCLUDE_DIRS})
+endif()
 
 
 set(gmock_dir "${CMAKE_CURRENT_SOURCE_DIR}/lib/gmock")
