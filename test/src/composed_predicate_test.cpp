@@ -1,46 +1,13 @@
-#include <string>
 #include <functional>
 
 #include <gmock/gmock.h>
 
 #include <predicate/composed_predicate.hpp>
 
+#include "person.hpp"
+
 
 using namespace ::testing;
-
-class person;
-
-class person {
-public:
-	person(const std::string& gender, unsigned int age) : gender_(gender),
-		age_(age)
-	{
-	}
-
-	bool
-	is_adult() const
-	{
-		return this->age_ >= 18;
-	}
-
-	bool
-	is_male() const
-	{
-		return this->gender_ == "male";
-	}
-
-	bool
-	is_older_than(unsigned int age) const
-	{
-		return this->age_ > age;
-	}
-
-
-private:
-	std::string gender_;
-	unsigned int age_;
-};
-
 
 namespace nonstd
 {
@@ -119,6 +86,7 @@ TEST(composed_predicate_and,
 
 	ASSERT_THAT(is_male_allowed_to_drink(some_boy), Eq(false));
 }
+
 
 } // namespace predicate.
 } // namespace nonstd.
