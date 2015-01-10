@@ -46,7 +46,8 @@ evaluate_predicates(const std::vector<TPredicate>& predicates,
 
 /**
  * Composed predicate allows you to combine multiple predicates into single
- * one.
+ * one. Implements fluent interface, e.g.:
+ *	composed_predicate.and_(predicate1).and_(predicate2);
  */
 template <typename TObject, typename TPredicate1,
 	typename TPredicate2 = impl::default_predicate<TObject> >
@@ -57,10 +58,11 @@ public:
 	 * operator()(TObject object) will be called, logical and will be applied
 	 * to these predicates.
 	 */
-	void
+	composed_predicate<TObject, TPredicate1, TPredicate2>&
 	and_(const TPredicate1& predicate)
 	{
 		this->predicates1_.push_back(predicate);
+		return *this;
 	}
 
 
@@ -69,10 +71,11 @@ public:
 	 * operator()(TObject object) will be called, logical and will be applied
 	 * to these predicates.
 	 */
-	void
+	composed_predicate<TObject, TPredicate1, TPredicate2>&
 	and_(const TPredicate2& predicate)
 	{
 		this->predicates2_.push_back(predicate);
+		return *this;
 	}
 
 

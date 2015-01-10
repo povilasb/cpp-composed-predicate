@@ -108,10 +108,11 @@ TEST(composed_predicate_and,
 	composed_predicate<person, predicate1_type, predicate2_type>
 		is_male_allowed_to_drink;
 
-	is_male_allowed_to_drink.and_(std::mem_fun_ref(&person::is_male));
 	unsigned int drinking_age = 21;
-	is_male_allowed_to_drink.and_(std::bind2nd(
-		std::mem_fun_ref(&person::is_older_than), drinking_age));
+	is_male_allowed_to_drink
+		.and_(std::bind2nd(std::mem_fun_ref(&person::is_older_than),
+			drinking_age))
+		.and_(std::mem_fun_ref(&person::is_male));
 
 
 	person some_boy("male", 12);
