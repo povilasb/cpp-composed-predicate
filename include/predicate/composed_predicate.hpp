@@ -95,7 +95,8 @@ private:
 
 /**
  * Deduces predicate types from the specified arguments and creates appropriate
- * composed predicate.
+ * composed predicate. This factory is used when two different types of
+ * predicates are used to compose predicates.
  */
 template <typename TObject, typename TPredicate1, typename TPredicate2>
 composed_predicate<TObject, TPredicate1, TPredicate2>
@@ -104,6 +105,22 @@ make_composed_predicate(const TPredicate1& predicate1,
 {
 	composed_predicate<TObject, TPredicate1, TPredicate2> retval;
 	retval.and_(predicate1).and_(predicate2);
+
+	return retval;
+}
+
+
+/**
+ * Deduces predicate type from the specified argument and creates appropriate
+ * composed predicate. This factory is used only when one type of predicates
+ * are used to compose predicates.
+ */
+template <typename TObject, typename TPredicate1>
+composed_predicate<TObject, TPredicate1>
+make_composed_predicate(const TPredicate1& predicate1)
+{
+	composed_predicate<TObject, TPredicate1> retval;
+	retval.and_(predicate1);
 
 	return retval;
 }

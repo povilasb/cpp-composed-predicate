@@ -31,5 +31,19 @@ TEST(boost_composed_predicate_and,
 }
 
 
+TEST(boost_composed_predicate_and,
+	returns_true_when_all_predicates_are_satisfied)
+{
+	BOOST_AUTO(is_male_adult, make_composed_predicate<person>(
+		std::mem_fun_ref(&person::is_male))
+	);
+	is_male_adult.and_(std::mem_fun_ref(&person::is_adult));
+
+	person me("male", 24);
+
+	ASSERT_THAT(is_male_adult(me), Eq(true));
+}
+
+
 } // namespace predicate.
 } // namespace nonstd.
