@@ -108,6 +108,21 @@ make_composed_predicate(const TPredicate1& predicate1,
 	return retval;
 }
 
+
+/**
+ * Deduces predicate types from the specified arguments and creates appropriate
+ * composed predicate.
+ */
+template <typename TObject, typename TPredicate1>
+composed_predicate<TObject, TPredicate1>
+make_composed_predicate(const TPredicate1& predicate1)
+{
+	composed_predicate<TObject, TPredicate1> retval;
+	retval.and_(predicate1);
+
+	return retval;
+}
+
 } // namespace predicate.
 } // namespace nonstd.
 
