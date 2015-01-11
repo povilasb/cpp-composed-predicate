@@ -13,8 +13,8 @@ before_install:
 
 install:
   - sudo apt-get install libboost-dev
-  - sudo apt-get install g++-4.7
-  - export CXX=g++-4.7
+  - if [ "$CXX" = "g++" ]; then sudo apt-get install g++-4.7 ; fi
+  - if [ "$CXX" = "g++" ]; then export CXX=g++-4.7 ; fi
 
 
 script:
