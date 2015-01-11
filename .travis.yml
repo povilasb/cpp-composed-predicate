@@ -6,8 +6,10 @@ compiler:
   - g++
 
 
-before_install:
+install:
   - sudo apt-get install libboost-dev
+  - sudo apt-get install g++-4.7
+  - export CXX=g++-4.7
 
 
 script:
